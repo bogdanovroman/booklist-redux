@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import AllLists from './All_lists';
-import List from './List';
+import React, {Component, PropTypes} from 'react';
+import AllLists from './all_lists';
+import List from './current_list';
+import NewList from './new_list';
 import Header from './header';
-import { connect } from 'react-redux';
-import { changeViewTo } from '../actions/view';
+import {connect} from 'react-redux';
 
 /*
   в этом компоненте будет менять state.view в зависимости от которого
@@ -11,33 +11,29 @@ import { changeViewTo } from '../actions/view';
 */
 
 class App extends Component {
-    changeViewHandler() {
-      this.props.changeView('list');
-    }
-    render () {
-      let view, stateView = this.props.view;
-      if (stateView === 'lists') {
-        view = <AllLists />
-      } else if (stateView === 'list') {
-        view = <List />
-      }
-      return (
-        <div>
-          <Header />
-          <div>set view to:
-              <span onClick={this.changeViewHandler.bind(this)}>lists</span>
-          </div>
-          {view}
-
-        </div>
-
-      )
+    render() {
+        let View,
+            stateView = this.props.view;
+        if (stateView === 'lists') {
+            View = <AllLists/>
+        } else if (stateView === 'current_list') {
+            View = <List/>
+        } else if (stateView === 'new_list') {
+            View = <NewList />
+        }
+        return (
+            <div>
+                <Header/>
+                <div className="uk-container uk-margin-large-bottom">
+                    {View}
+                </div>
+            </div>
+        )
     }
 }
 
 App.propTypes = {
-    view: PropTypes.string.isRequired,
-    changeView: PropTypes.func.isRequired
+    view: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -47,9 +43,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        changeView : (view) => dispatch(changeViewTo(view))
-    };
+    return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
