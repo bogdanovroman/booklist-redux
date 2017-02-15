@@ -3,6 +3,7 @@ import { all_lists, itemsHasErrored, itemsIsLoading } from './lists';
 import { newList } from './new_list';
 import { view, currentList } from './view';
 import { user } from './user';
+import { currentUser } from './current_user';
 
 export default combineReducers({
     view,
@@ -12,4 +13,5 @@ export default combineReducers({
     currentList,
     itemsHasErrored,
     itemsIsLoading,
+    currentUser
 });

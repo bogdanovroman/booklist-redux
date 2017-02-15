@@ -20,9 +20,8 @@ export function itemsIsLoading(state = false, action) {
 
 export function all_lists(state = [], action) {
     switch (action.type) {
-        case 'ITEMS_FETCH_DATA_SUCCESS':
+        case 'FETCH_ALL_LISTS_SUCCESS':
             return action.all_lists;
-
         default:
             return state;
     }

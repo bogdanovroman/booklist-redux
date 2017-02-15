@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import AllLists from './all_lists';
 import List from './current_list';
 import NewList from './new_list';
+import User from './current_user';
 import Header from './header';
 import {connect} from 'react-redux';
 
@@ -19,7 +20,9 @@ class App extends Component {
         } else if (stateView === 'current_list') {
             View = <List/>
         } else if (stateView === 'new_list') {
-            View = <NewList />
+            View = <NewList/>
+        } else if (stateView === 'current_user') {
+            View = <User/>
         }
         return (
             <div>

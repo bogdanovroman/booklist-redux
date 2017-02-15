@@ -52,7 +52,6 @@ class List extends Component {
                             <div className="uk-grid">
                                 {bookTemplate}
                             </div>
-
                         </div>
                         <div className="uk-card-footer uk-text-center">
                             <a href="#" className="uk-button uk-button-text">комментировать</a>
@@ -68,7 +67,9 @@ class List extends Component {
 List.propTypes = {};
 
 const mapStateToProps = (state) => {
-    return {list: state.currentList};
+    return {
+        list: state.currentList
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {

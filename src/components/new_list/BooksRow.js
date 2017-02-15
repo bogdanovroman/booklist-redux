@@ -1,15 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {updateStateBooks} from '../../actions/new_list';
 
 class BooksRow extends Component {
     setBookAuthor(item, index, event) {
-
+      var books = this.props.books;
+      books[index].author = event.target.value;
+      this.props.updateStateBooks(books)
     }
     setBookTitle(item, index, event) {
-
+      var books = this.props.books;
+      books[index].title = event.target.value;
+      this.props.updateStateBooks(books);
     }
     render() {
-        console.log(this.props.books);
         let bookTemplate = this.props.books.map((item, index) => {
             var boundAuthorChange = this.setBookAuthor.bind(this, item, index);
             var boundTitleChange = this.setBookTitle.bind(this, item, index);
@@ -48,7 +52,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {};
+    return {
+      updateStateBooks: (books) => dispatch(updateStateBooks(books))
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksRow);

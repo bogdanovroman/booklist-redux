@@ -17,10 +17,15 @@ var ajax = {
     },
     postNewUser: function(req, res) {
         db.getAllUsers(req, res, function(all_users) {
-            var isNew = false;
+            var isNew = true;
             for (var i = 0; i < all_users.length; i++) {
                 if (req.body.id != all_users[i].id) {
+                    console.log('is new');
                     isNew = true;
+                } else {
+                    console.log('exist');
+                    isNew = false;
+                    break;
                 }
             }
             if (isNew) {
@@ -51,6 +56,12 @@ var ajax = {
                 }
                 res.end(JSON.stringify(result));
             })
+        })
+    },
+    getCurrentUser : function(req, res){
+        db.getCurrentUser(req, res, function(user){
+            console.log(user);
+            res.end(JSON.stringify(user));
         })
     }
 }

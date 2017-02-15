@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import BooksRow from './BooksRow';
-import {addBookRow} from '../../actions/new_list';
+import {addBookRow, createNewList, newListSetTitle, newListSetDescription} from '../../actions/new_list';
 import {changeViewTo} from '../../actions/view';
 // import './style.scss';
 
@@ -12,25 +12,49 @@ class NewList extends Component {
     backToListsHandler() {
         this.props.changeViewTo('lists');
     }
+    onChangeDescriptionHandler (e) {
+      let description = e.target.value;
+      this.props.newListSetDescription(description);
+    }
+    onChangeTitleHandler (e) {
+      let title = e.target.value;
+      this.props.newListSetTitle(title);
+    }
+    onSubmitHandler (e) {
+        e.preventDefault();
+        let newList = this.props.newList;
+            newList.author = this.props.user.id;
+        this.props.createNewList(newList);
+    }
     render() {
         return (
             <div>
-                <h2 className="uk-heading-bullet">
-                    Создать новый
-                </h2>
+                <h2 className="uk-heading-bullet">Создать новый</h2>
                 <div className="uk-card uk-card-default uk-card-hover">
-                    <form>
+                    <form onSubmit={this.onSubmitHandler.bind(this)}>
                         <div className="uk-card-header">
                             <div className="uk-margin">
                                 <label className="uk-form-label" htmlFor="newlist_title">Название</label>
                                 <div className="uk-form-controls">
-                                    <input className="uk-input" id="newlist_title" name="newlist_title" type="text" placeholder=""/>
+                                    <input
+                                      className="uk-input"
+                                      name="newlist_title"
+                                      type="text"
+                                      placeholder=""
+                                      onChange={this.onChangeTitleHandler.bind(this)}
+                                    />
                                 </div>
                             </div>
                             <div className="uk-margin">
                                 <label className="uk-form-label" htmlFor="newlist_description">Описание</label>
                                 <div className="uk-form-controls">
-                                    <textarea className="uk-textarea" rows="2" id="newlist_description" name="newlist_description" type="text" placeholder=""/>
+                                    <textarea
+                                      className="uk-textarea"
+                                      rows="2"
+                                      name="newlist_description"
+                                      type="text"
+                                      onChange={this.onChangeDescriptionHandler.bind(this)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -63,13 +87,19 @@ class NewList extends Component {
 NewList.propTypes = {};
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+      newList: state.newList,
+      user: state.user
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addBooksRow : () => dispatch(addBookRow()),
         changeViewTo: (view) => dispatch(changeViewTo(view)),
+        createNewList: (new_list) => dispatch(createNewList(new_list)),
+        newListSetTitle: (title) => dispatch(newListSetTitle(title)),
+        newListSetDescription: (description) => dispatch(newListSetDescription(description))
     };
 };
 

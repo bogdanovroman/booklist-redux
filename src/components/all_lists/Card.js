@@ -1,15 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
-class Card extends Component {
+export default class Card extends Component {
     onDetailsButtonClickHandler() {
         this.props.showDetails();
+    }
+    onUserAvatarClickHandler () {
+        this.props.showCurrentUserInfo();
     }
     render() {
         var data = this.props.list;
         var date = this.props.list.date.split('').slice(0, 10).join('').split('-');
         var dateString = date[2] + '.' + date[1] + '.' + date[0];
-
         var bookTemplate = this.props.list.items.map(function(item, index) {
             return (
                 <div className="uk-card uk-card-hover uk-card-body" key={index}>
@@ -24,7 +26,12 @@ class Card extends Component {
                     <div className="uk-card-header">
                         <div className="uk-grid uk-grid-small uk-flex-middle">
                             <div className="uk-width-auto">
-                                <img class="uk-border-circle uk-svg" title={data.userData.name} is uk-tooltip width="40" height="40" src={data.userData.url}/>
+                                <img class="uk-border-circle uk-svg"
+                                    title={data.userData.name}
+                                    is uk-tooltip width="40" height="40"
+                                    src={data.userData.url}
+                                    onClick={this.onUserAvatarClickHandler.bind(this)}
+                                    />
                             </div>
                             <div className="uk-width-expand">
                                 <h3 className="uk-card-title uk-margin-remove-bottom">{data.title}</h3>
@@ -45,15 +52,3 @@ class Card extends Component {
         )
     }
 }
-
-Card.propTypes = {};
-
-const mapStateToProps = (state) => {
-    return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);

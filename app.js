@@ -43,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', render.cleanLayout);
 app.get('/all_lists', ajax.getAllListsWithUserData);
+app.get('/user/:id', ajax.getCurrentUser);
 app.post('/new_list', ajax.postNewList);
 app.post('/new_user', ajax.postNewUser);
 

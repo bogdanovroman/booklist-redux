@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {itemsFetchData, itemsHasErrored} from '../../actions/lists';
-import {changeViewToCurrentList, changeViewTo, getCurrentList} from '../../actions/view';
+import {fetchAllLists, itemsHasErrored} from '../../actions/lists';
+import {changeViewToCurrentList, changeViewTo, getCurrentList, getCurrentUser} from '../../actions/view';
+import {fecthCurrentUser} from '../../actions/current_user';
 import Card from './Card'
 import './style.scss';
 
 class AllLists extends Component {
     componentDidMount() {
-        this.props.fetchData('/all_lists');
+        this.props.fetchAllLists();
     }
     setViewToNewList() {
         this.props.changeViewTo('new_list');
@@ -16,11 +17,15 @@ class AllLists extends Component {
         this.props.changeViewTo('current_list');
         this.props.currentList(item);
     }
+    setViewToCurrentUser (item) {
+        this.props.fecthCurrentUser('/user/' + item.author);
+    }
     render() {
         let CardTemplate = this.props.all_lists.map(function(item, index) {
-            let boundClick = this.setViewToCurrentList.bind(this, item);
+            let detailsClick = this.setViewToCurrentList.bind(this, item);
+            let userClick = this.setViewToCurrentUser.bind(this, item);
             return (
-                <Card list={item} key={index} showDetails={boundClick}/>
+                <Card list={item} key={index} showDetails={detailsClick} showCurrentUserInfo={userClick}/>
             )
         }.bind(this))
         return (
@@ -49,10 +54,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(itemsFetchData(url)),
+        fetchAllLists: (url) => dispatch(fetchAllLists(url)),
         changeViewTo: (view) => dispatch(changeViewTo(view)),
         changeViewToCurrentList: (view, list) => dispatch(changeViewToCurrentList(view, list)),
-        currentList: (list) => dispatch(getCurrentList(list))
+        currentList: (list) => dispatch(getCurrentList(list)),
+        fecthCurrentUser: (user) => dispatch(fecthCurrentUser(user))
     };
 };
 

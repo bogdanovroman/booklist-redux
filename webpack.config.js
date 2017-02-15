@@ -8,18 +8,21 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: 'booklist.js',
         publicPath: '/static/'
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot-loader', 'babel-loader'],
+                loaders: [
+                    'react-hot-loader', 'babel-loader'
+                ],
                 include: path.join(__dirname, 'src')
-            },
-            {
+            }, {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader', 'sass-loader']
             }

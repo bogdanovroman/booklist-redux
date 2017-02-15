@@ -5,6 +5,7 @@ function getUserData(callback) {
         }
     });
 }
+
 function getUserAvatar(callback) {
     FB.api("/me/picture", function(response) {
         if (response && !response.error) {
@@ -12,17 +13,19 @@ function getUserAvatar(callback) {
         }
     });
 }
+
 export function userWasLogged(user) {
-    return {
-        type: 'USER_WAS_LOGGED',
-        user
-    };
+    return {type: 'USER_WAS_LOGGED', user};
 }
+
 export function userWasNotLogged() {
-    return {
-        type: 'USER_WAS_NOT_LOGGED'
-    };
+    return {type: 'USER_WAS_NOT_LOGGED'};
 }
+
+export function userWasSaved(bool) {
+    return {type: 'USER_WAS_SAVED', bool};
+}
+
 export function facebookData() {
     return (dispatch) => {
         window.fbAsyncInit = function() {
@@ -35,7 +38,8 @@ export function facebookData() {
                             let user = {
                                 name: dataNameId.name,
                                 id: dataNameId.id,
-                                url: dataUrl
+                                url: dataUrl.data.url,
+                                isLogged : 'yes'
                             }
                             dispatch(userWasLogged(user));
                         })
@@ -57,4 +61,55 @@ export function facebookData() {
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     }
+}
+
+export function loginToFacebook() {
+    return (dispatch) => {
+        FB.login(function(response) {
+          if (response.status === 'connected') {
+              getUserData(function(dataNameId) {
+                  getUserAvatar(function(dataUrl) {
+                      let user = {
+                          name: dataNameId.name,
+                          id: dataNameId.id,
+                          url: dataUrl.data.url,
+                          isLogged : 'yes'
+                      }
+                      dispatch(userWasLogged(user));
+                      dispatch(sendUserData(user))
+                  })
+              })
+          } else {
+              dispatch(userWasNotLogged());
+          }
+        }, {scope: 'public_profile,email'});
+    }
+}
+
+export function sendUserData (user) {
+  return (dispatch) => {
+    let data = {};
+      data.id = user.id;
+      data.name = user.name;
+      data.url = user.url;
+      $.ajax({
+          url: '/new_user',
+          dataType: 'json',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          complete: function() {
+              dispatch(userWasSaved(true));
+          }.bind(this)
+      });
+  }
+}
+
+export function logOut () {
+  return (dispatch) => {
+    FB.logout(function(response) {
+        console.log('user is not logged in ', response);
+        dispatch(userWasNotLogged());
+      });
+  }
 }
