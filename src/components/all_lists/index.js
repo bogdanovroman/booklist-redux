@@ -1,8 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {fetchAllLists, itemsHasErrored} from '../../actions/lists';
-import {changeViewToCurrentList, changeViewTo, getCurrentList, getCurrentUser} from '../../actions/view';
+import {changeViewTo} from '../../actions/view';
 import {fecthCurrentUser} from '../../actions/current_user';
+import {fecthCurrentList} from '../../actions/current_list';
 import Card from './Card'
 import './style.scss';
 
@@ -14,8 +15,7 @@ class AllLists extends Component {
         this.props.changeViewTo('new_list');
     }
     setViewToCurrentList(item) {
-        this.props.changeViewTo('current_list');
-        this.props.currentList(item);
+        this.props.fecthCurrentList('/list/' + item._id);
     }
     setViewToCurrentUser (item) {
         this.props.fecthCurrentUser('/user/' + item.author);
@@ -37,7 +37,7 @@ class AllLists extends Component {
                         <span className="uk-margin-small-left">создать</span>
                     </button>
                 </h2>
-                <div is class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-match" uk-grid id="all_lists__wrapper">
+                <div is class="uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-2 uk-grid-match booklists-card-wrapper uk-grid-small" uk-grid id="all_lists__wrapper">
                     {CardTemplate}
                 </div>
 
@@ -56,9 +56,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchAllLists: (url) => dispatch(fetchAllLists(url)),
         changeViewTo: (view) => dispatch(changeViewTo(view)),
-        changeViewToCurrentList: (view, list) => dispatch(changeViewToCurrentList(view, list)),
-        currentList: (list) => dispatch(getCurrentList(list)),
-        fecthCurrentUser: (user) => dispatch(fecthCurrentUser(user))
+        fecthCurrentUser: (url) => dispatch(fecthCurrentUser(url)),
+        fecthCurrentList: (url) => dispatch(fecthCurrentList(url))
     };
 };
 

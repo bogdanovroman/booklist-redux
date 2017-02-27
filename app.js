@@ -43,7 +43,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', render.cleanLayout);
 app.get('/all_lists', ajax.getAllListsWithUserData);
-app.get('/user/:id', ajax.getCurrentUser);
+app.get('/user/:id', ajax.getCurrentUserById);
+app.get('/list/:id', ajax.getCurrentListById);
+app.get('/user/fb/:id', ajax.getCurrentUserByFacebookId);
 app.post('/new_list', ajax.postNewList);
 app.post('/new_user', ajax.postNewUser);
 

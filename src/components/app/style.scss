@@ -1,0 +1,51 @@
+.wrapper {
+    .loading-alert {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(89deg, transparent, #1e87f0, transparent);
+      background-size: 500% 500%;
+      -webkit-animation: headLoading 2s ease-in-out infinite;
+      -moz-animation: headLoading 2s ease-in-out infinite;
+      animation: headLoading 2s ease-in-out infinite;
+      z-index: 999;
+      display: none;
+    }
+    &.loading {
+      .loading-alert{
+        display: block;
+      }
+    }
+}
+@-webkit-keyframes headLoading {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes headLoading {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+@keyframes headLoading {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+
+
+html{
+    background: #e5e5e5; /* fallback for old browsers */
+
+}
+
+// кастомизируем внешний вид
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: rgba(35, 35, 35, 0.9);
+    .uk-navbar-item{
+        color: #f0e9dc;
+    }
+}

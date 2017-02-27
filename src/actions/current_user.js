@@ -1,25 +1,25 @@
 import {changeViewTo} from './view';
+import {isError, isLoading} from './utils';
 
-export function fecthCurrentUserSuccess(user) {
-    return {type: 'CURRENT_USER', user};
+export function fecthCurrentUserSuccess(result) {
+    return {type: 'CURRENT_USER', result};
 }
 
 export function fecthCurrentUser(url) {
     return (dispatch) => {
-        // dispatch(itemsIsLoading(true));
+        dispatch(isLoading(true));
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                // dispatch(itemsIsLoading(false));
                 return response;
             })
             .then((response) => response.json())
-            .then((user) => {
-                dispatch(fecthCurrentUserSuccess(user))
+            .then((result) => {
+                dispatch(fecthCurrentUserSuccess(result))
                 dispatch(changeViewTo('current_user'))
+                dispatch(isLoading(false));
             })
-            // .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

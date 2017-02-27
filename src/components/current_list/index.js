@@ -1,15 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {changeViewTo} from '../../actions/view';
+import {showComments} from '../../actions/current_list';
 import './style.scss';
+import Comments from '../comments';
 
 /*
   View для конкретного списка
 */
-
 class List extends Component {
     backToListsHandler() {
         this.props.changeViewTo('lists');
+    }
+    showComments() {
+        this.props.showComments(true);
     }
     render() {
         let data = this.props.list;
@@ -23,6 +27,9 @@ class List extends Component {
                 </div>
             )
         })
+        let CommentsTemplate = data.commentsShow
+            ? <Comments data={data.comments}/>
+            : null;
         return (
             <div>
                 <h2 className="">
@@ -53,13 +60,22 @@ class List extends Component {
                                 {bookTemplate}
                             </div>
                         </div>
-                        <div className="uk-card-footer uk-text-center">
-                            <a href="#" className="uk-button uk-button-text">комментировать</a>
+                        <div className="uk-card-footer">
+                            <ul className="uk-iconnav uk-flex-right uk-flex-middle">
+                                <li className="">
+                                    <a href="#" is uk-icon="icon: heart" class="uk-display-inline-block"></a>
+                                    <span className="uk-display-inline-block uk-margin-small-left">11</span>
+                                </li>
+                                <li className="uk-margin-small-left">
+                                    <span onClick={this.showComments.bind(this)} is uk-icon="icon: comments" class="uk-display-inline-block"></span>
+                                    <span className="uk-display-inline-block uk-margin-small-left">11</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+                {CommentsTemplate}
             </div>
-
         )
     }
 }
@@ -67,14 +83,13 @@ class List extends Component {
 List.propTypes = {};
 
 const mapStateToProps = (state) => {
-    return {
-        list: state.currentList
-    };
+    return {list: state.currentList};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeViewTo: (list) => dispatch(changeViewTo(list))
+        changeViewTo: (list) => dispatch(changeViewTo(list)),
+        showComments: (bool) => dispatch(showComments(bool))
     };
 };
 

@@ -1,10 +1,73 @@
-#all_lists__wrapper{
+.booklists-card-wrapper{
   .uk-card{
+    &-header{
+        padding: 5px 15px;
+        .uk-card-title{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
     &-body{
       > p{
         height: 50px;
         overflow: hidden;
       }
     }
+    &-footer{
+        padding: 15px;
+    }
   }
+}
+.books-posters{
+  width: 100%;
+  font-size: 0;
+  position: relative;
+  &:before{
+    content: '';
+    display: block;
+    padding-top: 80%;
+  }
+  &-item{
+    display: inline-block;
+    position: absolute;
+    height: 50%;
+    vertical-align: top;
+    overflow: hidden;
+    img{
+      position: absolute;
+    //   top: 50%;
+    //   transform: translateY(-50%);
+    top: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+    &:nth-child(1){
+      left: 0;
+      top: 0;
+    }
+    &:nth-child(2){
+      left: 33.3333%;
+      top: 0;
+    }
+    &:nth-child(3){
+      left: 66.6666%;
+      top: 0;
+    }
+    &:nth-child(4){
+      left: 0;
+      top: 50%;
+    }
+    &:nth-child(5){
+      left: 33.3333%;;
+      top: 50%;
+    }
+    &:nth-child(6){
+      left: 66.6666%;
+      top: 50%;
+    }
+  }
+}
+.no-padding{
+  padding: 0;
 }

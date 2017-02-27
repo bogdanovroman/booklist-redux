@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import { all_lists, itemsHasErrored, itemsIsLoading } from './lists';
+import { all_lists } from './lists';
 import { newList } from './new_list';
-import { view, currentList } from './view';
+import { view } from './view';
 import { user } from './user';
 import { currentUser } from './current_user';
+import { currentList } from './current_list';
+import { isError, isLoading } from './utils';
 
 export default combineReducers({
     view,
@@ -11,7 +13,7 @@ export default combineReducers({
     all_lists,
     newList,
     currentList,
-    itemsHasErrored,
-    itemsIsLoading,
+    isError,
+    isLoading,
     currentUser
 });

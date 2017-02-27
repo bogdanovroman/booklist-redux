@@ -1,31 +1,35 @@
-function getUserData(callback) {
-    FB.api("/me", function(response) {
+import {isError, isLoading} from './utils';
+
+export function userWasLogged() {
+    return {type: 'USER_WAS_LOGGED'};
+}
+export function userWasNotLogged() {
+    return {type: 'USER_WAS_NOT_LOGGED'};
+}
+export function updateUserData (user) {
+    return {type: 'UPDATE_USER_DATA', user};
+}
+export function updateUserListsScope (id) {
+    return {type: 'UPDATE_USER_LISTS_SCOPE', id};
+}
+
+
+// FACEBOOK
+
+function getFacebookUserData(callback) {
+    FB.api("/me", {fields: 'id,name,email'}, function(response) {
         if (response && !response.error) {
             callback(response);
         }
     });
 }
-
-function getUserAvatar(callback) {
+function getFacebookUserAvatar(callback) {
     FB.api("/me/picture", function(response) {
         if (response && !response.error) {
             callback(response);
         }
     });
 }
-
-export function userWasLogged(user) {
-    return {type: 'USER_WAS_LOGGED', user};
-}
-
-export function userWasNotLogged() {
-    return {type: 'USER_WAS_NOT_LOGGED'};
-}
-
-export function userWasSaved(bool) {
-    return {type: 'USER_WAS_SAVED', bool};
-}
-
 export function facebookData() {
     return (dispatch) => {
         window.fbAsyncInit = function() {
@@ -33,17 +37,7 @@ export function facebookData() {
             FB.AppEvents.logPageView();
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
-                    getUserData(function(dataNameId) {
-                        getUserAvatar(function(dataUrl) {
-                            let user = {
-                                name: dataNameId.name,
-                                id: dataNameId.id,
-                                url: dataUrl.data.url,
-                                isLogged : 'yes'
-                            }
-                            dispatch(userWasLogged(user));
-                        })
-                    })
+                    dispatch(fecthUserData('/user/fb/' + response.authResponse.userID));
                 } else {
                     dispatch(userWasNotLogged());
                 }
@@ -62,20 +56,18 @@ export function facebookData() {
         }(document, 'script', 'facebook-jssdk'));
     }
 }
-
 export function loginToFacebook() {
     return (dispatch) => {
         FB.login(function(response) {
           if (response.status === 'connected') {
-              getUserData(function(dataNameId) {
-                  getUserAvatar(function(dataUrl) {
+              getFacebookUserData(function(data) {
+                  getFacebookUserAvatar(function(url) {
                       let user = {
-                          name: dataNameId.name,
-                          id: dataNameId.id,
-                          url: dataUrl.data.url,
-                          isLogged : 'yes'
+                          name: data.name,
+                          id: data.id,
+                          email: data.email,
+                          url: url.data.url
                       }
-                      dispatch(userWasLogged(user));
                       dispatch(sendUserData(user))
                   })
               })
@@ -85,12 +77,24 @@ export function loginToFacebook() {
         }, {scope: 'public_profile,email'});
     }
 }
+export function logOut () {
+  return (dispatch) => {
+    FB.logout(function(response) {
+        dispatch(userWasNotLogged());
+      });
+  }
+}
+
+
+// AJAX TO DB
 
 export function sendUserData (user) {
   return (dispatch) => {
+    dispatch(isLoading(true));
     let data = {};
       data.id = user.id;
       data.name = user.name;
+      data.email = user.email;
       data.url = user.url;
       $.ajax({
           url: '/new_user',
@@ -98,18 +102,28 @@ export function sendUserData (user) {
           type: 'POST',
           contentType: 'application/json',
           data: JSON.stringify(data),
-          complete: function() {
-              dispatch(userWasSaved(true));
+          complete: function(result) {
+              let userData = result.responseJSON;
+              dispatch(updateUserData(userData));
+              dispatch(userWasLogged());
+              dispatch(isLoading(false));
           }.bind(this)
       });
   }
 }
-
-export function logOut () {
-  return (dispatch) => {
-    FB.logout(function(response) {
-        console.log('user is not logged in ', response);
-        dispatch(userWasNotLogged());
-      });
-  }
+export function fecthUserData(url) {
+    return (dispatch) => {
+        dispatch(isLoading(true));
+        fetch(url)
+            .then((response) => {
+                if (!response.ok) { throw Error(response.statusText);}
+                return response;
+            })
+            .then((response) => response.json())
+            .then((user) => {
+                dispatch(updateUserData(user))
+                dispatch(userWasLogged());
+                dispatch(isLoading(false));
+            })
+    };
 }

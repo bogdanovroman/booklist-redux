@@ -18,7 +18,7 @@ class Header extends Component {
         let authTemplate,
             user = this.props.user;
         if (user.isLogged == 'yes') {
-            authTemplate = <ul className="uk-navbar-nav">
+            authTemplate = <ul className="uk-navbar-nav uk-animation-fade">
                 <li className="uk-inline">
                     <span className="uk-text-middle">{user.name}</span>
                     <div className="uk-inline">
@@ -27,16 +27,12 @@ class Header extends Component {
                 </li>
             </ul>
         } else if (user.isLogged == 'no') {
-            authTemplate = <button is class="uk-button uk-button-text" onClick={this.loginToFacebookHandler.bind(this)}>Facebook</button>
-        } else {
-            authTemplate = <div is uk-spinner></div>
+            authTemplate = <button is class="uk-button uk-button-text uk-animation-fade" onClick={this.loginToFacebookHandler.bind(this)}>Facebook</button>
         }
         return (
-            <nav is class="uk-navbar-container uk-margin-bottom" uk-navbar>
+            <nav is class="uk-navbar-container uk-margin-bottom" uk-navbar uk-sticky="bottom: #offset">
                 <div className="uk-navbar-left">
-                    <a className="uk-navbar-item uk-logo" href="#">
-                        <img is src="images/open-book.svg" alt=""/>
-                    </a>
+                    <a className="uk-navbar-item uk-logo" href="#">BooksList</a>
                 </div>
                 <div className="uk-navbar-right">
                     <div className="uk-navbar-item">

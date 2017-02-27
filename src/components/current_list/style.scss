@@ -2,3 +2,10 @@
   padding: 0 10px;
   display: block;
 }
+.with-items-right{
+  width: 100%;
+  text-align: right;
+  li{
+    display: inline-block;
+  }
+}

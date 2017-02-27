@@ -23,7 +23,7 @@ class NewList extends Component {
     onSubmitHandler (e) {
         e.preventDefault();
         let newList = this.props.newList;
-            newList.author = this.props.user.id;
+            newList.author = this.props.user._id;
         this.props.createNewList(newList);
     }
     render() {

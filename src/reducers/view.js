@@ -6,12 +6,3 @@ export function view(state = 'lists', action) {
             return state;
     }
 }
-
-export function currentList(state = {}, action) {
-    switch (action.type) {
-        case 'CURRENT_LIST':
-            return action.list;
-        default:
-            return state;
-    }
-}

@@ -1,13 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import './style.scss';
 
 export default class Card extends Component {
     onDetailsButtonClickHandler() {
         this.props.showDetails();
     }
-    onUserAvatarClickHandler (event) {
-        event.stopPropagation();
+    onUserAvatarClickHandler () {
         this.props.showCurrentUserInfo();
     }
     render() {
@@ -24,17 +22,9 @@ export default class Card extends Component {
         })
         return (
             <div>
-                <div className="uk-margin uk-card uk-card-default uk-card-hover" onClick={this.onDetailsButtonClickHandler.bind(this)}>
+                <div className="uk-margin uk-card uk-card-default uk-card-hover">
                     <div className="uk-card-header">
                         <div className="uk-grid uk-grid-small uk-flex-middle">
-                            <div className="uk-width-auto">
-                                <img class="uk-border-circle uk-svg"
-                                    title={data.userData.name}
-                                    is uk-tooltip width="40" height="40"
-                                    src={data.userData.url}
-                                    onClick={this.onUserAvatarClickHandler.bind(this)}
-                                    />
-                            </div>
                             <div className="uk-width-expand">
                                 <h3 className="uk-card-title uk-margin-remove-bottom">{data.title}</h3>
                                 <p className="uk-text-meta uk-margin-remove-top">
@@ -65,17 +55,8 @@ export default class Card extends Component {
                           </div>
                         </div>
                     </div>
-                    <div className="uk-card-footer">
-                        <ul className="uk-iconnav uk-flex-right uk-flex-middle">
-                            <li className="">
-                                <a href="#" is uk-icon="icon: heart" class="uk-display-inline-block"></a>
-                                <span className="uk-display-inline-block uk-margin-small-left">11</span>
-                            </li>
-                            <li className="uk-margin-small-left">
-                                <span is uk-icon="icon: comments" class="uk-display-inline-block"></span>
-                                <span className="uk-display-inline-block uk-margin-small-left">11</span>
-                            </li>
-                        </ul>
+                    <div className="uk-card-footer uk-text-right">
+                        <button className="uk-button uk-button-text" onClick={this.onDetailsButtonClickHandler.bind(this)}>детали</button>
                     </div>
                 </div>
             </div>

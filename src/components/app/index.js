@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
-import AllLists from './all_lists';
-import List from './current_list';
-import NewList from './new_list';
-import User from './current_user';
-import Header from './header';
+import AllLists from '../all_lists';
+import List from '../current_list';
+import NewList from '../new_list';
+import User from '../current_user';
+import Header from '../header';
 import {connect} from 'react-redux';
+import './style.scss';
 
 /*
   в этом компоненте будет менять state.view в зависимости от которого
@@ -13,8 +14,7 @@ import {connect} from 'react-redux';
 
 class App extends Component {
     render() {
-        let View,
-            stateView = this.props.view;
+        let View, stateView = this.props.view, isLoadingClassName = this.props.isLoading ? " loading" : "";
         if (stateView === 'lists') {
             View = <AllLists/>
         } else if (stateView === 'current_list') {
@@ -24,10 +24,12 @@ class App extends Component {
         } else if (stateView === 'current_user') {
             View = <User/>
         }
+
         return (
-            <div>
+            <div className={"wrapper " + isLoadingClassName}>
+                <div className="loading-alert uk-animation-fast uk-animation-slide-top-small"></div>
                 <Header/>
-                <div className="uk-container uk-margin-large-bottom">
+                <div className="uk-container uk-margin-large-bottom uk-margin-medium-top">
                     {View}
                 </div>
             </div>
@@ -41,7 +43,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        view: state.view
+        view: state.view,
+        isLoading: state.isLoading
     };
 };
 
