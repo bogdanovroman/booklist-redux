@@ -24,12 +24,11 @@ class App extends Component {
         } else if (stateView === 'current_user') {
             View = <User/>
         }
-
         return (
             <div className={"wrapper " + isLoadingClassName}>
                 <div className="loading-alert uk-animation-fast uk-animation-slide-top-small"></div>
                 <Header/>
-                <div className="uk-container uk-margin-large-bottom uk-margin-medium-top">
+                <div className="uk-container uk-margin-large-bottom uk-margin-medium-top uk-container-large">
                     {View}
                 </div>
             </div>

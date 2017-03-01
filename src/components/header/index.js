@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {facebookData, logOut, loginToFacebook } from '../../actions/user';
-import AuthModal from './AuthModal';
 import './style.scss';
 
 class Header extends Component {
@@ -32,7 +31,9 @@ class Header extends Component {
         return (
             <nav is class="uk-navbar-container uk-margin-bottom" uk-navbar uk-sticky="bottom: #offset">
                 <div className="uk-navbar-left">
-                    <a className="uk-navbar-item uk-logo" href="#">BooksList</a>
+                    <a className="uk-navbar-item uk-logo" href="#">
+                        <img src="images/logo.svg" alt=""/>
+                    </a>
                 </div>
                 <div className="uk-navbar-right">
                     <div className="uk-navbar-item">

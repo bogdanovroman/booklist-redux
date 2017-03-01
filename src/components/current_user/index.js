@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {changeViewToCurrentList, changeViewTo, getCurrentList, getCurrentUser} from '../../actions/view';
+import {fecthCurrentList} from '../../actions/current_list';
 import Card from './Card';
 
 
@@ -9,8 +10,7 @@ class User extends Component {
         this.props.changeViewTo('lists')
     }
     setViewToCurrentList(item) {
-        this.props.changeViewTo('current_list');
-        this.props.currentList(item);
+        this.props.fecthCurrentList('/list/' + item._id);
     }
     render() {
         let user = this.props.user;
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changeViewTo: (view) => dispatch(changeViewTo(view)),
-        currentList: (list) => dispatch(getCurrentList(list))
+        fecthCurrentList: (url) => dispatch(fecthCurrentList(url))
     };
 };
 

@@ -1,11 +1,15 @@
 .booklists-card-wrapper{
   .uk-card{
     &-header{
-        padding: 5px 15px;
+        padding: 10px 15px;
         .uk-card-title{
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-size: 1rem;
+        }
+        .uk-text-meta{
+          font-size: .8rem;
         }
     }
     &-body{
@@ -26,7 +30,7 @@
   &:before{
     content: '';
     display: block;
-    padding-top: 80%;
+    padding-top: 100%;
   }
   &-item{
     display: inline-block;

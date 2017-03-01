@@ -37,15 +37,22 @@
 }
 
 
-html{
-    background: #e5e5e5; /* fallback for old browsers */
-
-}
+// vars:
+// $dark: #333;
+// $darkest: #111;
+// $light: #fafafa;
+// $primary: #ff7826;
+// $secondary: #ff7826;
+// $tertiary: #ff7826;
 
 // кастомизируем внешний вид
+html{
+    background: #f1f1f1;
+    user-select: none;
+}
 .uk-navbar-container:not(.uk-navbar-transparent) {
-    background: rgba(35, 35, 35, 0.9);
+    // background: rgba(1, 1, 1, .1);
+    box-shadow: 0 -3px 15px 0px #666;
     .uk-navbar-item{
-        color: #f0e9dc;
     }
 }

@@ -22,7 +22,8 @@ export default class Card extends Component {
         })
         return (
             <div>
-                <div className="uk-margin uk-card uk-card-default uk-card-hover">
+                <div className="uk-margin uk-card uk-card-default uk-card-hover"
+                  onClick={this.onDetailsButtonClickHandler.bind(this)}>
                     <div className="uk-card-header">
                         <div className="uk-grid uk-grid-small uk-flex-middle">
                             <div className="uk-width-expand">
@@ -55,8 +56,17 @@ export default class Card extends Component {
                           </div>
                         </div>
                     </div>
-                    <div className="uk-card-footer uk-text-right">
-                        <button className="uk-button uk-button-text" onClick={this.onDetailsButtonClickHandler.bind(this)}>детали</button>
+                    <div className="uk-card-footer">
+                        <ul className="uk-iconnav uk-flex-right uk-flex-middle">
+                            <li className="">
+                                <a href="#" is uk-icon="icon: heart" class="uk-display-inline-block"></a>
+                                <span className="uk-display-inline-block uk-margin-small-left">11</span>
+                            </li>
+                            <li className="uk-margin-small-left">
+                                <span is uk-icon="icon: comments" class="uk-display-inline-block"></span>
+                                <span className="uk-display-inline-block uk-margin-small-left">11</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

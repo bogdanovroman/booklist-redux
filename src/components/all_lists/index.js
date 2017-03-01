@@ -37,7 +37,7 @@ class AllLists extends Component {
                         <span className="uk-margin-small-left">создать</span>
                     </button>
                 </h2>
-                <div is class="uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-2 uk-grid-match booklists-card-wrapper uk-grid-small" uk-grid id="all_lists__wrapper">
+                <div is class="uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-child-width-1-6@xl uk-grid-match booklists-card-wrapper uk-grid-small" uk-grid id="all_lists__wrapper">
                     {CardTemplate}
                 </div>
 
