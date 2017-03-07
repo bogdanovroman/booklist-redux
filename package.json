@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "asdasd",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node bin/www",
+    "start": "node bin/www",
     "dev": "cross-env NODE_ENV=dev node bin/www",
     "lint": "eslint src",
     "build": "webpack --config ./webpack.config.production.js --progress --colors"
