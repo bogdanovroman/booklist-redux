@@ -1,16 +1,16 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {facebookData, logOut, loginToFacebook } from '../../actions/user';
+import {facebookData, logOut, loginToFacebook} from '../../actions/user';
 import './style.scss';
 
 class Header extends Component {
     componentDidMount() {
         this.props.checkIfLoggedToFb();
     }
-    logOutHandler () {
-      this.props.logOut();
+    logOutFromFacebookHandler() {
+        this.props.logOut();
     }
-    loginToFacebookHandler(){
+    loginToFacebookHandler() {
         this.props.loginToFacebook();
     }
     render() {
@@ -21,9 +21,12 @@ class Header extends Component {
                 <li className="uk-inline">
                     <span className="uk-text-middle">{user.name}</span>
                     <div className="uk-inline">
-                        <img className="uk-border-circle uk-margin-left" src={user.url} width="50" height="50"/>
+                        <img className="uk-border-circle uk-margin-left" src={user.picture} width="50" height="50"/>
                     </div>
                 </li>
+                <div is uk-drop="mode: click; pos: bottom-right" class="uk-card uk-card-body uk-card-default uk-width-auto uk-padding-small">
+                      <button className="uk-button uk-button-text" onClick={this.logOutFromFacebookHandler.bind(this)}>Выйти</button>
+                </div>
             </ul>
         } else if (user.isLogged == 'no') {
             authTemplate = <button is class="uk-button uk-button-text uk-animation-fade" onClick={this.loginToFacebookHandler.bind(this)}>Facebook</button>
@@ -40,6 +43,7 @@ class Header extends Component {
                         {authTemplate}
                     </div>
                 </div>
+                <div className="loading-alert uk-animation-fast uk-animation-slide-top-small"></div>
             </nav>
         )
     }
@@ -48,15 +52,13 @@ class Header extends Component {
 Header.propTypes = {};
 
 const mapStateToProps = (state) => {
-    return {
-      user: state.user
-    };
+    return {user: state.user};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         checkIfLoggedToFb: () => dispatch(facebookData()),
-        logOut : () => dispatch(logOut()),
+        logOut: () => dispatch(logOut()),
         loginToFacebook: () => dispatch(loginToFacebook())
     };
 };

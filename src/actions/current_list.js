@@ -24,6 +24,29 @@ export function fecthCurrentList(url) {
     };
 }
 
-export function showComments(bool) {
-    return {type: 'SHOW_COMMENTS', bool};
+export function updateCurrentListSuccess (option, response) {
+    return {type: 'UPDATE', option, response};
+}
+
+// отправляем аяксом лайк в базу
+export function updateCurrentList(id, option, content) {
+    return (dispatch) => {
+        dispatch(isLoading(true));
+        if (option =='like') {
+            var data = {};
+            data.id = content;
+        }
+        const url = '/update/list/'+ id +'/' + option;
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            complete: function(response) {
+                dispatch(updateCurrentListSuccess(option, response.responseJSON));
+                dispatch(isLoading(false));
+            }
+        });
+    }
 }

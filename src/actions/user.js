@@ -30,6 +30,13 @@ function getFacebookUserAvatar(callback) {
         }
     });
 }
+function getFacebookUserAvatarLarge(callback) {
+    FB.api("/me/picture", {type: 'large'}, function(response) {
+        if (response && !response.error) {
+            callback(response);
+        }
+    });
+}
 export function facebookData() {
     return (dispatch) => {
         window.fbAsyncInit = function() {
@@ -61,14 +68,17 @@ export function loginToFacebook() {
         FB.login(function(response) {
           if (response.status === 'connected') {
               getFacebookUserData(function(data) {
-                  getFacebookUserAvatar(function(url) {
+                  getFacebookUserAvatar(function(picture) {
+                    getFacebookUserAvatarLarge(function(pictureLarge){
                       let user = {
                           name: data.name,
                           id: data.id,
                           email: data.email,
-                          url: url.data.url
+                          picture: picture.data.url,
+                          pictureLarge: pictureLarge.data.url
                       }
                       dispatch(sendUserData(user))
+                    })
                   })
               })
           } else {
@@ -95,7 +105,8 @@ export function sendUserData (user) {
       data.id = user.id;
       data.name = user.name;
       data.email = user.email;
-      data.url = user.url;
+      data.picture = user.picture;
+      data.pictureLarge = user.pictureLarge;
       $.ajax({
           url: '/new_user',
           dataType: 'json',

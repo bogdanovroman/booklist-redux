@@ -26,7 +26,6 @@ class App extends Component {
         }
         return (
             <div className={"wrapper " + isLoadingClassName}>
-                <div className="loading-alert uk-animation-fast uk-animation-slide-top-small"></div>
                 <Header/>
                 <div className="uk-container uk-margin-large-bottom uk-margin-medium-top uk-container-large">
                     {View}

@@ -1,16 +1,16 @@
 .wrapper {
     .loading-alert {
       content: "";
-      position: fixed;
-      top: 0;
+      position: absolute;
+      bottom: 0;
       left: 0;
       right: 0;
       height: 5px;
-      background: linear-gradient(89deg, transparent, #1e87f0, transparent);
+      background: linear-gradient(90deg, transparent, #1e87f0, transparent);
       background-size: 500% 500%;
-      -webkit-animation: headLoading 2s ease-in-out infinite;
-      -moz-animation: headLoading 2s ease-in-out infinite;
-      animation: headLoading 2s ease-in-out infinite;
+      -webkit-animation: headLoading 5s linear infinite;
+      -moz-animation: headLoading 5s linear infinite;
+      animation: headLoading 5s linear infinite;
       z-index: 999;
       display: none;
     }
@@ -37,15 +37,8 @@
 }
 
 
-// vars:
-// $dark: #333;
-// $darkest: #111;
-// $light: #fafafa;
-// $primary: #ff7826;
-// $secondary: #ff7826;
-// $tertiary: #ff7826;
 
-// кастомизируем внешний вид
+$primary: #f4581b;
 html{
     background: #f1f1f1;
     user-select: none;
@@ -56,3 +49,10 @@ html{
     .uk-navbar-item{
     }
 }
+// .uk-button-primary{
+//   background: $primary;
+//   color: #f1f1f1;
+//   &:hover{
+//     background: #de602e;
+//   }
+// }

@@ -9,3 +9,17 @@
     display: inline-block;
   }
 }
+.no-border{
+    border:none !important;
+}
+.active{
+    .uk-icon{
+        svg path{
+            fill: red;
+            stroke: red!important;
+        }
+    }
+}
+.comment-area{
+    resize: vertical;
+}

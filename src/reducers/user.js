@@ -1,7 +1,9 @@
 let initialState = {
   id: '',
   name: '',
-  url: '',
+  picture: '',
+  email: '',
+  pictureLarge: '',
   isLogged : 'not_yet'
 }
 export function user(state = initialState, action) {
@@ -13,7 +15,9 @@ export function user(state = initialState, action) {
               isLogged : 'no',
               id : '',
               name: '',
-              url: ''
+              email: '',
+              picture: '',
+              pictureLarge: ''
             });
         case 'UPDATE_USER_DATA':
           return Object.assign({}, state, action.user);
