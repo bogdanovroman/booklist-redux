@@ -28,7 +28,13 @@ var db = {
             id: req.body.id
         }, function(err, user) {
             if (!user) {
-                new User({id: req.body.id, name: req.body.name, url: req.body.url}).save(function(err, newUser) {
+                new User({
+                  id: req.body.id,
+                  name: req.body.name,
+                  email: req.body.email,
+                  picture: req.body.picture,
+                  pictureLarge: req.body.pictureLarge
+                }).save(function(err, newUser) {
                     if (err)
                         console.error(err);
                     callback(newUser);
@@ -81,7 +87,6 @@ var db = {
         }, function(err, lists) {
             callback(lists);
         });
-
     },
     getCurrentListUserData: function(req, res, id, callback) {
         User.findOne({
@@ -94,15 +99,55 @@ var db = {
                 console.error(err)
         });
     },
-    getCurrentListById: function(req, res, callback) {
+    getCurrentListById: function(req, res, id, callback) {
         List.findOne({
-            _id: req.params.id
+            _id: id
         }, function(err, list) {
             if (typeof list != 'undefined') {
                 callback(list)
             }
             if (err)
                 console.error(err)
+        });
+    },
+    updateCurrentList: function (req, res, callback) {
+        List.findOne({
+            _id: req.params.id
+        }, function(err, list) {
+            if (req.params.option == 'like') {
+                var index = list.likes.indexOf(req.body.id)
+                if (index == -1) {
+                    list.likes.push(req.body.id);
+                } else {
+                    list.likes.splice(index, 1);
+                }
+                list.save(function(err, updatedList) {
+                    if (err) console.error(err);
+                    callback(updatedList.likes);
+                });
+            }
+        });
+    },
+    postNewComment : function (req, res, user, list, callback) {
+        List.findOne({
+            _id: list._id
+        }, function(err, list) {
+            var date = new Date().toISOString();
+            var commentData = {
+                text : req.body.text,
+                author : {
+                    name : user.name,
+                    id : user._id,
+                    picture : user.picture,
+                    email : user.email
+                },
+                date : date
+            }
+            list.comments.push(commentData);
+            list.save(function(err, result) {
+                if (err) console.error(err);
+                callback(result.comments);
+            });
         });
     }
 }

@@ -47,8 +47,9 @@ var ajax = {
                     }
                     lists.userData = {
                         "name": newUserData.name,
-                        "url": newUserData.url,
-                        "email" : newUserData.email
+                        "picture": newUserData.picture,
+                        "email" : newUserData.email,
+                        "pictureLarge" : newUserData.pictureLarge
                     };
                     result.push(lists);
                 }
@@ -77,12 +78,26 @@ var ajax = {
     // найти конкретный список +
     // получить данные о юзере, который его создал
     getCurrentListById : function(req, res){
-        db.getCurrentListById(req, res, function(list){
+        db.getCurrentListById(req, res, req.params.id, function(list){
             db.getCurrentListUserData(req, res, list.author, function(userData){
               var result = {};
               result.list = list;
               result.userData = userData;
               res.end(JSON.stringify(result));
+            })
+        })
+    },
+    updateCurrentList : function (req, res) {
+        db.updateCurrentList(req, res, function(response){
+            res.end(JSON.stringify(response));
+        })
+    },
+    postNewComment: function (req, res) {
+        db.getCurrentListById(req, res, req.body.listId, function(list){
+            db.getCurrentListUserData(req, res, req.body.author, function(user){
+                db.postNewComment(req, res, user, list, function(comments){
+                    res.end(JSON.stringify(comments));
+                })
             })
         })
     }
