@@ -1,10 +1,6 @@
 {
   "name": "booklist-redux",
   "version": "1.0.0",
-  "engines": {
-    "node": "5.4.1",
-    "npm": "3.3.12"
-  },
   "description": "asdasd",
   "scripts": {
     "start": "node bin/www",
@@ -29,10 +25,7 @@
     "eslint-plugin-react": "^3.6.2",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^5.0.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^2.2.1",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "style-loader": "^0.13.1"
   },
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
@@ -52,6 +45,9 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-thunk": "^2.2.0",
     "serve-favicon": "~2.3.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-middleware": "^1.10.1",
+    "webpack-hot-middleware": "^2.17.1",
     "whatwg-fetch": "^2.0.2"
   }
 }
