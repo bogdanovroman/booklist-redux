@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
 var config = require('./webpack.config');
 var webpack = require('webpack');
 
@@ -21,20 +20,18 @@ var db = require('./tools/db');
 
 var app = express();
 
-// webpack
-var compiler = webpack(config);
-app.use(require('webpack-dev-middleware')(compiler, {
-  publicPath: config.output.publicPath
-}));
-app.use(require('webpack-hot-middleware')(compiler));
-
+if (process.env.NODE_ENV != 'production') {
+    var compiler = webpack(config);
+    app.use(require('webpack-dev-middleware')(compiler, {
+      publicPath: config.output.publicPath
+    }));
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,6 +45,8 @@ app.get('/list/:id', ajax.getCurrentListById);
 app.get('/user/fb/:id', ajax.getCurrentUserByFacebookId);
 app.post('/new_list', ajax.postNewList);
 app.post('/new_user', ajax.postNewUser);
+app.post('/new_comment', ajax.postNewComment);
+app.post('/update/list/:id/:option', ajax.updateCurrentList);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
