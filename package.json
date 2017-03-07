@@ -13,7 +13,6 @@
     "url": "https://github.com/bogdanovroman/booklist-redux.git"
   },
   "author": "Roman Bogdanov <romanlbogdanov@gmail.com> (https://github.com/bogdanovroman)",
-  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.0.20",
     "babel-eslint": "^4.1.3",
