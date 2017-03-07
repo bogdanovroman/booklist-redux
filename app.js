@@ -19,13 +19,13 @@ var ajax = require('./tools/ajax');
 var db = require('./tools/db');
 
 var app = express();
-process.env.NODE_ENV = 'production';
-if (process.env.NODE_ENV != 'production') {
-    var compiler = webpack(config);
-    app.use(require('webpack-dev-middleware')(compiler, {
-      publicPath: config.output.publicPath
-    }));
-}
+// process.env.NODE_ENV = 'production';
+// if (process.env.NODE_ENV != 'production') {
+//     var compiler = webpack(config);
+//     app.use(require('webpack-dev-middleware')(compiler, {
+//       publicPath: config.output.publicPath
+//     }));
+// }
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
