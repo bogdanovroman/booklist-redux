@@ -65,7 +65,9 @@ export function facebookData() {
 }
 export function loginToFacebook() {
     return (dispatch) => {
+        console.log('loginToFacebook() ');
         FB.login(function(response) {
+            console.log(response);
           if (response.status === 'connected') {
               getFacebookUserData(function(data) {
                   getFacebookUserAvatar(function(picture) {
@@ -77,6 +79,7 @@ export function loginToFacebook() {
                           picture: picture.data.url,
                           pictureLarge: pictureLarge.data.url
                       }
+                      console.log('response user is ', user);
                       dispatch(sendUserData(user))
                     })
                   })
@@ -100,6 +103,7 @@ export function logOut () {
 
 export function sendUserData (user) {
   return (dispatch) => {
+    console.log('send login data to db');
     dispatch(isLoading(true));
     let data = {};
       data.id = user.id;
