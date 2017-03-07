@@ -103,7 +103,6 @@ export function logOut () {
 
 export function sendUserData (user) {
   return (dispatch) => {
-    console.log('send login data to db');
     dispatch(isLoading(true));
     let data = {};
       data.id = user.id;
@@ -121,6 +120,7 @@ export function sendUserData (user) {
               let userData = result.responseJSON;
               dispatch(updateUserData(userData));
               dispatch(userWasLogged());
+              console.log('send login data to db');
               dispatch(isLoading(false));
           }.bind(this)
       });
