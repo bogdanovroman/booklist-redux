@@ -11,10 +11,18 @@ export default class Card extends Component {
         this.props.showCurrentUserInfo();
     }
     render() {
-        var data = this.props.list;
-        var date = this.props.list.date.split('').slice(0, 10).join('').split('-');
-        var dateString = date[2] + '.' + date[1] + '.' + date[0];
-        var bookTemplate = this.props.list.items.map(function(item, index) {
+        let likeIsActive;
+        if (this.props.list.likes.indexOf(this.props.user._id) != -1) {
+            likeIsActive = true;
+        } else {
+            likeIsActive = false;
+        }
+        let list = this.props.list,
+            date = list.date.split('').slice(0, 10).join('').split('-'),
+            dateString = date[2] + '.' + date[1] + '.' + date[0],
+            likes = list.likes.length,
+            commentsLength = list.comments.length,
+            bookTemplate = list.items.map(function(item, index) {
             return (
                 <div className="uk-card uk-card-hover uk-card-body" key={index}>
                     <h3 className="uk-card-title uk-margin-remove">{item.title}</h3>
@@ -29,14 +37,14 @@ export default class Card extends Component {
                         <div className="uk-grid uk-grid-small uk-flex-middle">
                             <div className="uk-width-auto">
                                 <img class="uk-border-circle uk-svg"
-                                    title={data.userData.name}
+                                    title={list.userData.name}
                                     is uk-tooltip width="40" height="40"
-                                    src={data.userData.url}
+                                    src={list.userData.picture}
                                     onClick={this.onUserAvatarClickHandler.bind(this)}
                                     />
                             </div>
                             <div className="uk-width-expand">
-                                <h3 className="uk-card-title uk-margin-remove-bottom">{data.title}</h3>
+                                <h3 className="uk-card-title uk-margin-remove-bottom">{list.title}</h3>
                                 <p className="uk-text-meta uk-margin-remove-top">
                                     <time>{dateString}</time>
                                 </p>
@@ -65,17 +73,19 @@ export default class Card extends Component {
                           </div>
                         </div>
                     </div>
-                    <div className="uk-card-footer">
-                        <ul className="uk-iconnav uk-flex-right uk-flex-middle">
-                            <li className="">
-                                <a href="#" is uk-icon="icon: heart" class="uk-display-inline-block"></a>
-                                <span className="uk-display-inline-block uk-margin-small-left">11</span>
-                            </li>
-                            <li className="uk-margin-small-left">
-                                <span is uk-icon="icon: comments" class="uk-display-inline-block"></span>
-                                <span className="uk-display-inline-block uk-margin-small-left">11</span>
-                            </li>
-                        </ul>
+                    <div className="uk-card-footer uk-flex uk-flex-middle uk-flex-right">
+                        <div className={likeIsActive ? 'active' : ''}>
+                            <span href="#" is uk-icon="icon: heart"></span>
+                            <span className="uk-margin-small-left">{likes}</span>
+                        </div>
+                        <div className="uk-margin-left">
+                            <span is uk-icon="icon: comments"></span>
+                            <span className="uk-margin-small-left">{commentsLength}</span>
+                        </div>
+                        <div className="uk-margin-left">
+                            <span is uk-icon="icon: forward"></span>
+                            <span className="uk-margin-small-left">{list.replies.length}</span>
+                        </div>
                     </div>
                 </div>
             </div>

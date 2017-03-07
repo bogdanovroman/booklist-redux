@@ -7,9 +7,9 @@ module.exports = {
         'webpack-hot-middleware/client', './src/index'
     ],
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, './public/js'),
         filename: 'booklist.js',
-        publicPath: '/static/'
+        publicPath: '/js/'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()

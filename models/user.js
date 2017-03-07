@@ -8,7 +8,13 @@ var userSchema = new Schema({
     id: {
         type: String
     },
-    url: {
+    picture: {
+        type: String
+    },
+    email: {
+        type: String
+    },
+    pictureLarge: {
         type: String
     },
     lists : {

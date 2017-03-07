@@ -25,7 +25,7 @@ class AllLists extends Component {
             let detailsClick = this.setViewToCurrentList.bind(this, item);
             let userClick = this.setViewToCurrentUser.bind(this, item);
             return (
-                <Card list={item} key={index} showDetails={detailsClick} showCurrentUserInfo={userClick}/>
+                <Card list={item} key={index} showDetails={detailsClick} showCurrentUserInfo={userClick} user={this.props.user}/>
             )
         }.bind(this))
         return (
@@ -48,7 +48,8 @@ class AllLists extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        all_lists: state.all_lists
+        all_lists: state.all_lists,
+        user: state.user
     };
 };
 
