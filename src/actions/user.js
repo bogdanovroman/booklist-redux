@@ -65,7 +65,6 @@ export function facebookData() {
 }
 export function loginToFacebook() {
     return (dispatch) => {
-        console.log('loginToFacebook() ');
         FB.login(function(response) {
             console.log(response);
           if (response.status === 'connected') {

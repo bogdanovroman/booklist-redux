@@ -30,6 +30,8 @@ class Header extends Component {
             </ul>
         } else if (user.isLogged == 'no') {
             authTemplate = <button is class="uk-button uk-button-text uk-animation-fade" onClick={this.loginToFacebookHandler.bind(this)}>Facebook</button>
+        } else {
+            authTemplate = <div className="q">Подождите</div>
         }
         return (
             <nav is class="uk-navbar-container uk-margin-bottom" uk-navbar uk-sticky="bottom: #offset">
