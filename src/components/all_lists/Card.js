@@ -36,9 +36,8 @@ export default class Card extends Component {
                     <div className="uk-card-header">
                         <div className="uk-grid uk-grid-small uk-flex-middle">
                             <div className="uk-width-auto">
-                                <img class="uk-border-circle uk-svg"
-                                    title={list.userData.name}
-                                    is uk-tooltip width="40" height="40"
+                                <img className="uk-border-circle uk-svg"
+                                    width="40" height="40"
                                     src={list.userData.picture}
                                     onClick={this.onUserAvatarClickHandler.bind(this)}
                                     />

@@ -77,7 +77,6 @@ export function loginToFacebook() {
                           picture: picture.data.url,
                           pictureLarge: pictureLarge.data.url
                       }
-                      console.log('response user is ', user);
                       dispatch(sendUserData(user))
                     })
                   })
@@ -115,7 +114,6 @@ export function sendUserData (user) {
           contentType: 'application/json',
           data: JSON.stringify(data),
           complete: function(result) {
-              console.log('result from db after sending newUser', result);
               let userData = result.responseJSON;
               dispatch(updateUserData(userData));
               dispatch(userWasLogged());

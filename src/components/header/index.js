@@ -21,7 +21,7 @@ class Header extends Component {
                 <li className="uk-inline">
                     <span className="uk-text-middle">{user.name}</span>
                     <div className="uk-inline">
-                        <img className="uk-border-circle uk-margin-left" src={user.picture} width="50" height="50"/>
+                        <img className="uk-border-circle uk-margin-small-left" src={user.picture} width="50" height="50"/>
                     </div>
                 </li>
                 <div is uk-drop="mode: click; pos: bottom-right" class="uk-card uk-card-body uk-card-default uk-width-auto uk-padding-small">
@@ -30,7 +30,7 @@ class Header extends Component {
             </ul>
         } else if (user.isLogged == 'no') {
             authTemplate = <button is class="uk-button uk-button-text uk-animation-fade" onClick={this.loginToFacebookHandler.bind(this)}>Facebook</button>
-        } 
+        }
         return (
             <nav is class="uk-navbar-container uk-margin-bottom" uk-navbar uk-sticky="bottom: #offset">
                 <div className="uk-navbar-left">
