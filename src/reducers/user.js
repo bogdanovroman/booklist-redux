@@ -4,7 +4,6 @@ let initialState = {
   picture: '',
   email: '',
   pictureLarge: '',
-  isLogged : 'not_yet'
 }
 export function user(state = initialState, action) {
     switch (action.type) {
