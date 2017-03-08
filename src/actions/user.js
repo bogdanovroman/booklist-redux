@@ -135,6 +135,7 @@ export function fecthUserData(url) {
             })
             .then((response) => response.json())
             .then((user) => {
+                console.log('user ', user);
                 dispatch(updateUserData(user))
                 dispatch(userWasLogged());
                 dispatch(isLoading(false));
