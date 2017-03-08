@@ -66,7 +66,6 @@ export function facebookData() {
 export function loginToFacebook() {
     return (dispatch) => {
         FB.login(function(response) {
-            console.log(response);
           if (response.status === 'connected') {
               getFacebookUserData(function(data) {
                   getFacebookUserAvatar(function(picture) {
@@ -116,10 +115,10 @@ export function sendUserData (user) {
           contentType: 'application/json',
           data: JSON.stringify(data),
           complete: function(result) {
+              console.log('result from db after sending newUser', result);
               let userData = result.responseJSON;
               dispatch(updateUserData(userData));
               dispatch(userWasLogged());
-              console.log('send login data to db');
               dispatch(isLoading(false));
           }.bind(this)
       });
@@ -135,9 +134,12 @@ export function fecthUserData(url) {
             })
             .then((response) => response.json())
             .then((user) => {
-                console.log('user ', user);
-                dispatch(updateUserData(user))
-                dispatch(userWasLogged());
+                if (user !== null) {
+                    dispatch(updateUserData(user))
+                    dispatch(userWasLogged());
+                } else {
+                    dispatch(userWasNotLogged());
+                }
                 dispatch(isLoading(false));
             })
     };
