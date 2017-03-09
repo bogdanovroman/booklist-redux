@@ -28,3 +28,13 @@ nav.uk-navbar-container{
         margin: 0 !important;
     }
 }
+.uk-offcanvas-page-overlay{
+    body, .wrapper, #root{
+        height: 100vh;
+        overflow: hidden;
+        z-index: -1;
+    }
+}
+.uk-offcanvas-overlay{
+    transform: translate3d(0,0,0);
+}
