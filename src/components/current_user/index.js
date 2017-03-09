@@ -16,9 +16,10 @@ class User extends Component {
         let user = this.props.user,
             numberOfLists = user.lists.length,
             CardTemplate = user.listsData.map(function(item, index) {
-            let detailsClick = this.setViewToCurrentList.bind(this, item);
-            return (<Card list={item} key={index} showDetails={detailsClick}/>)
-        }.bind(this))
+                let detailsClick = this.setViewToCurrentList.bind(this, item);
+                return (
+                    <Card list={item} key={index} showDetails={detailsClick} user={this.props.user}/>
+            )}.bind(this))
         return (
             <div>
                 <h2 className="">
@@ -33,7 +34,7 @@ class User extends Component {
                             <div className="uk-flex-middle uk-text-center">
                                 <h3 className="uk-heading-line uk-text-center"><span>{user.name}</span></h3>
                                 <div className="">
-                                    <img class="uk-border-circle uk-svg" title={user.name} is uk-tooltip src={user.pictureLarge} width="200" height="200"/>
+                                    <img class="uk-border-circle uk-svg" is src={user.pictureLarge} width="200" height="200"/>
                                 </div>
                                 <ul className="uk-iconnav uk-flex-center uk-flex-middle uk-margin-top">
                                     <li className="">
@@ -56,7 +57,10 @@ class User extends Component {
                         </div>
                     </div>
                 </div>
-                <div is class="uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-2 uk-grid-match booklists-card-wrapper uk-margin-top" uk-grid>
+                <h3 className="uk-heading-bullet">
+                    Списки этого пользователя
+                </h3>
+                <div is class="uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-child-width-1-6@xl uk-grid-match booklists-card-wrapper uk-grid-small uk-margin-top" uk-grid>
                     {CardTemplate}
                 </div>
             </div>
