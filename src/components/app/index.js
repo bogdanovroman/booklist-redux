@@ -30,6 +30,12 @@ class App extends Component {
                 <div className="uk-container uk-margin-large-bottom uk-margin-medium-top uk-container-large">
                     {View}
                 </div>
+                <div is id="offcanvas-push" uk-offcanvas="mode: slide; overlay: true" class="uk-animation uk-width-1-1">
+                    <div className="uk-offcanvas-bar">
+                        <h3>Крутая надпись</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
             </div>
         )
     }

@@ -64,12 +64,6 @@ class Header extends Component {
                         </div>
                     </div>
                     <div className="loading-alert uk-animation-fast uk-animation-slide-top-small"></div>
-                    <div is id="offcanvas-push" uk-offcanvas="mode: reveal; overlay: true" class="uk-animation uk-width-1-1">
-                        <div className="uk-offcanvas-bar">
-                            <h3>Крутая надпись</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        </div>
-                    </div>
                 </nav>
             </div>
 
