@@ -5,3 +5,23 @@
     }
   }
 }
+@media screen and (max-width: 639px) {
+    .uk-navbar{
+        &-item{
+            height: 50px;
+            &.uk-logo img{
+                width: 50px;
+            }
+            .user-picture{
+                width: 35px;
+            }
+        }
+    }
+}
+.header-dropdown{
+    padding: 5px 0;
+    li{
+        padding: 10px 15px;
+        margin: 0 !important;
+    }
+}

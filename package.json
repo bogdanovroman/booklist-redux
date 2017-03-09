@@ -14,6 +14,7 @@
   },
   "author": "Roman Bogdanov <romanlbogdanov@gmail.com> (https://github.com/bogdanovroman)",
   "devDependencies": {},
+  "license": "MIT",
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "babel-core": "^6.23.1",
