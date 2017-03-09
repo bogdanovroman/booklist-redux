@@ -5,6 +5,7 @@ import {updateCurrentList} from '../../actions/current_list';
 import {fecthCurrentUser} from '../../actions/current_user';
 import {addNewComment, showNewComment, showComments} from '../../actions/comments';
 import './style.scss';
+import 'whatwg-fetch';
 import Comments from '../comments';
 import NewComment from '../comments/NewComment';
 

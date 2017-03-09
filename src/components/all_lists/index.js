@@ -4,6 +4,7 @@ import {fetchAllLists, itemsHasErrored} from '../../actions/lists';
 import {changeViewTo} from '../../actions/view';
 import {fecthCurrentUser} from '../../actions/current_user';
 import {fecthCurrentList} from '../../actions/current_list';
+import 'whatwg-fetch';
 import Card from './Card'
 import './style.scss';
 
