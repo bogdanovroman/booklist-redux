@@ -82,7 +82,7 @@ class List extends Component {
                                         <time>{dateString}</time>
                                     </p>
                                 </div>
-                                <div className="uk-width-expand">
+                                <div className="uk-width-expand@s">
                                     {list.description}
                                 </div>
                             </div>
@@ -92,31 +92,38 @@ class List extends Component {
                                 {bookTemplate}
                             </div>
                         </div>
-                        <div className="uk-card-footer uk-flex uk-flex-middle uk-flex-right">
-                            <div className={"uk-margin-right " + likesActiveClass}>
-                                <a is uk-icon="icon: heart" onClick={this.likeCurrentListHandler.bind(this)}></a>
-                                <span className="uk-margin-small-left">{likes}</span>
-                            </div>
-                            <div className="uk-margin-right">
-                                <span is uk-icon="icon: comment"></span>
-                                <span className="uk-margin-small-left">{list.comments.length}</span>
-                            </div>
-                            <div className="">
-                                <span is uk-icon="icon: forward"></span>
-                                <span className="uk-margin-small-left">{list.replies.length}</span>
+                        <div className="uk-card-footer uk-flex uk-flex-middle list-card-footer">
+                            <div className="uk-flex">
+                                <div className={"uk-margin-right " + likesActiveClass}>
+                                    <button onClick={this.likeCurrentListHandler.bind(this)} className="uk-button uk-button-default">
+                                        <span is uk-icon="icon: heart"></span>
+                                        <span className="uk-margin-small-left uk-visible@m">Мне нравится</span>
+                                        <span className="uk-margin-small-left">{likes}</span>
+                                    </button>
+                                </div>
+                                <div className="uk-margin-right">
+                                    <button onClick={this.showNewCommentHandler.bind(this)} className="uk-button uk-button-default">
+                                        <span is uk-icon="icon: commenting"></span>
+                                        <span className="uk-margin-small-left uk-visible@m">Комментировать</span>
+                                        <span className="uk-margin-small-left">{list.comments.length}</span>
+                                    </button>
+                                </div>
+                                <div className="">
+                                    <button onClick={this.showNewCommentHandler.bind(this)} className="uk-button uk-button-default">
+                                        <span is uk-icon="icon: forward"></span>
+                                        <span className="uk-margin-small-left uk-visible@m">Поделиться</span>
+                                        <span className="uk-margin-small-left">{list.replies.length}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="uk-margin-top">
-                    <div className="uk-flex">
-                        <button className="uk-button uk-button-default" onClick={this.showHideCommentsHandler.bind(this)}>
+                    <div>
+                        <button className="uk-button uk-button-default uk-width-1-1 uk-width-auto@s uk-text-truncate" onClick={this.showHideCommentsHandler.bind(this)}>
                             <span is uk-icon="icon: comments" class="uk-display-inline-block"></span>
                             <span className="uk-display-inline-block uk-margin-small-left">Показать/скрыть комментарии</span>
-                        </button>
-                        <button className="uk-button uk-button-default uk-margin-left" onClick={this.showNewCommentHandler.bind(this)}>
-                            <span is uk-icon="icon: commenting" class="uk-display-inline-block"></span>
-                            <span className="uk-display-inline-block uk-margin-small-left">Добавить новый</span>
                         </button>
                     </div>
                     {CommentsTemplate}

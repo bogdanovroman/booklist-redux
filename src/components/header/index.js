@@ -24,7 +24,7 @@ class Header extends Component {
                         <img className="uk-border-circle uk-margin-small-left user-picture" src={user.picture} width="50" height="50"/>
                     </div>
                 </li>
-                <ul is uk-drop="mode: click; pos: bottom-right" class="uk-card-default uk-list uk-width-auto header-dropdown uk-box-shadow-medium">
+                <ul is uk-drop="mode: click; pos: bottom-right" class="uk-card-default uk-list uk-width-auto header-dropdown uk-box-shadow-medium uk-visible@s">
                     <li className="uk-padding-small ">
                         <span is uk-icon="icon: settings" class="uk-margin-small-right uk-margin-small-left"></span>
                         <span onClick={this.logOutFromFacebookHandler.bind(this)}>Настройки</span>

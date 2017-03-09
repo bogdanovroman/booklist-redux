@@ -33,7 +33,7 @@ class AllLists extends Component {
             <div>
                 <h2 className="uk-heading-bullet">
                     Все списки
-                    <button className="uk-button uk-button-primary uk-position-center-right" onClick={this.setViewToNewList.bind(this)}>
+                    <button className="uk-button uk-button-primary uk-position-center-right uk-visible@s" onClick={this.setViewToNewList.bind(this)}>
                         <span is uk-icon="icon: plus"></span>
                         <span className="uk-margin-small-left">создать</span>
                     </button>
