@@ -11,12 +11,12 @@ nav.uk-navbar-container{
 @media screen and (max-width: 639px) {
     .uk-navbar{
         &-item{
-            height: 50px;
+            height: 60px;
             &.uk-logo img{
-                width: 50px;
+                width: 60px;
             }
             .user-picture{
-                width: 35px;
+                width: 45px;
             }
         }
     }
