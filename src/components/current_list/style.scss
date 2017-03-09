@@ -25,8 +25,17 @@
 }
 @media (max-width: 639px){
     .list-card-footer{
-        button{
-            padding: 0 20px;
+        .uk-flex{
+            -ms-flex-pack: end;
+            -webkit-justify-content: flex-end;
+            justify-content: flex-end
         }
+        button{
+            padding: 0;
+            border: none;
+        }
+    }
+    .uk-card-title{
+        font-size: 1.2rem;
     }
 }
